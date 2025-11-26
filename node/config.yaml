@@ -1,4 +1,4 @@
-scrape_url: "http://172.16.101.87:9615/metrics"
+scrape_url: "http://localhost:9615/metrics"
 remote_write:
   - url: "http://localhost:9091/api/v1/write"
     # auth_header: "Bearer my-token"
