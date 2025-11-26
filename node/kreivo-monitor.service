@@ -1,0 +1,13 @@
+[Unit]
+Description=Kreivo Monitor Agent
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/kreivo-monitor --config /etc/kreivo-monitor/config.yaml
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

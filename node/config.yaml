@@ -1,0 +1,9 @@
+scrape_url: "http://172.16.101.87:9615/metrics"
+remote_write:
+  - url: "http://localhost:9091/api/v1/write"
+    # auth_header: "Bearer my-token"
+alertmanager_url: "http://localhost:9093"
+actions:
+  restart: "echo restarting server"
+scrape_interval_seconds: 6
+poll_interval_seconds: 30

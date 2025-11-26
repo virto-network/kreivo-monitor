@@ -1,0 +1,25 @@
+groups:
+  - name: parachain_alerts
+    rules:
+      - alert: NodeDataStale
+        expr: up{job="parachain-node-scraper"} == 0
+        for: 5m
+        labels:
+          severity: critical
+          alert_action: restart
+        annotations:
+          summary: "Node {{ $labels.instance }} is down or not sending metrics"
+          description: "Node {{ $labels.instance }} has been down for more than 5 minutes."
+
+      - alert: NodeBlockHeightLagging
+        expr: |
+          (max without (instance) (polkadot_parachain_best_block_height))
+          - polkadot_parachain_best_block_height
+          > 50
+        for: 10m
+        labels:
+          severity: critical
+          alert_action: restart
+        annotations:
+          summary: "Node {{ $labels.instance }} is lagging behind"
+          description: "Node {{ $labels.instance }} is more than 50 blocks behind the cluster max."

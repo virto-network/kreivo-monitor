@@ -1,0 +1,17 @@
+route:
+  receiver: 'default-receiver'
+  routes:
+    - match:
+        severity: critical
+        alert_action: restart
+      receiver: 'cachet-gateway'
+      continue: true
+
+receivers:
+  - name: 'default-receiver'
+    # Default receiver config (e.g., email, slack)
+  
+  - name: 'cachet-gateway'
+    webhook_configs:
+      - url: 'http://prometheus-cachethq:8080/alertmanager'
+        send_resolved: true
